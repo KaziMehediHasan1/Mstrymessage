@@ -1,4 +1,4 @@
-import { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
 // MESSAGE TYPE
 export interface IMessage extends Document {
@@ -18,8 +18,9 @@ export interface IUser extends Document {
   password: string;
   verifyCode: string;
   verifyCodeExpiry: Date;
+  isVerified: boolean;
   isAcceptingMessage: boolean;
-  message: IMessage[];
+  messages: IMessage[];
 }
 
 // USER SCHEMA
@@ -37,10 +38,16 @@ const UserSchema: Schema<IUser> = new Schema({
   },
   password: { type: String, required: [true, "password is required"] },
   verifyCode: { type: String, required: [true, "Verify code is required"] },
+  isVerified: { type: Boolean, default: false },
   verifyCodeExpiry: {
     type: Date,
     required: [true, "verify code expiry is required"],
   },
-  isAcceptingMessage: { type: Boolean },
-  message: MessageSchema
+  isAcceptingMessage: { type: Boolean, default: true },
+  messages: [MessageSchema],
 });
+
+const UserModel =
+  (mongoose.models.User as mongoose.Model<IUser>) ||
+  mongoose.model<IUser>("User", UserSchema);
+export default UserModel;
