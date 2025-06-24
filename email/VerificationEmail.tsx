@@ -6,38 +6,33 @@ import {
   Container,
   Heading,
   Text,
-  Button,
   Hr,
 } from "@react-email/components";
 
 interface IVerificationEmailProps {
-  userName?: string;
-  loginUrl?: string;
+  username?: string;
+  otp?: string;
 }
 
 export const VerificationEmail = ({
-  userName = "John Doe",
-  loginUrl = "https://yourapp.com/login",
+  username,
+  otp,
 }: IVerificationEmailProps) => {
   return (
     <Html>
       <Head />
-      <Preview>Welcome to our platform, {userName}!</Preview>
+      <Preview>Welcome to our platform!</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Heading style={heading}>Hey {userName}, welcome aboard! 🎉</Heading>
-
+          <Heading style={heading}>Hey , welcome aboard! 🎉</Heading>
           <Text style={paragraph}>
-            We're excited to have you join us. Get started by logging into your
+            We are excited to have you join us. Get started by logging into your
             dashboard and exploring your new tools.
           </Text>
-
-          <Button href={loginUrl} style={button}>
+          {/* <Button href={loginUrl} style={button}>
             Go to Dashboard
-          </Button>
-
+          </Button> */}
           <Hr style={hr} />
-
           <Text style={footer}>
             If you didn’t sign up, please ignore this email or contact support.
           </Text>
@@ -74,14 +69,14 @@ const paragraph = {
   marginBottom: "24px",
 };
 
-const button = {
-  backgroundColor: "#0f172a",
-  color: "#ffffff",
-  padding: "12px 20px",
-  borderRadius: "6px",
-  textDecoration: "none",
-  fontSize: "16px",
-};
+// const button = {
+//   backgroundColor: "#0f172a",
+//   color: "#ffffff",
+//   padding: "12px 20px",
+//   borderRadius: "6px",
+//   textDecoration: "none",
+//   fontSize: "16px",
+// };
 
 const hr = {
   borderColor: "#e5e7eb",
